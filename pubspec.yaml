@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_fgbg: ^0.2.2
-  flutter_local_notifications: ^14.1.1
+  flutter_local_notifications: ^12.0.4
   just_audio: ^0.9.34
   plugin_platform_interface: ^2.1.4
   shared_preferences: ^2.1.2  
