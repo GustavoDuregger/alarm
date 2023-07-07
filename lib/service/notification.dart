@@ -54,9 +54,7 @@ class AlarmNotification {
 
   /// Stops the alarm.
   static Future<void> stopAlarm(int? id) async {
-    if (id != null &&
-        Alarm.getAlarm(id)?.stopOnNotificationOpen != null &&
-        Alarm.getAlarm(id)!.stopOnNotificationOpen) {
+    if (id != null && Alarm.getAlarm(id)?.stopOnNotificationOpen != null && Alarm.getAlarm(id)!.stopOnNotificationOpen) {
       await Alarm.stop(id);
     }
   }
@@ -66,13 +64,9 @@ class AlarmNotification {
     bool? result;
 
     result = defaultTargetPlatform == TargetPlatform.android
-        ? await localNotif
-            .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
-            ?.requestPermission()
+        ? await localNotif.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission()
         : await localNotif
-            .resolvePlatformSpecificImplementation<
-                IOSFlutterLocalNotificationsPlugin>()
+            .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
             ?.requestPermissions(alert: true, badge: true, sound: true);
 
     return result ?? false;
@@ -131,9 +125,8 @@ class AlarmNotification {
         body,
         tz.TZDateTime.from(zdt.toUtc(), tz.UTC),
         platformChannelSpecifics,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: true,
       );
       alarmPrint('Notification with id $id scheduled successfuly at $zdt');
     } catch (e) {
